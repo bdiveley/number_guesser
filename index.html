@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-  </style>
+  <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
   <script type="text/javascript" src="number_guesser.js"></script>
+  <nav>
+    <h1>
+      <span class="pink">Number</span><span class="gray"> Guesser</span>
+    </h1>
+  </nav>
+  <div class="game">
+    <input id="guess" placeholder="Enter your guess"><br>
+
+    <button class="button" onclick="guessNumber()">Guess</button>
+
+    <button class="button" onclick="clearGuess()">Clear</button><br>
+
+    <p id="response"></p>
+
+    <button class="button" onclick="resetGame()">Reset</button>
+  </div>
 </body>
 </html>
