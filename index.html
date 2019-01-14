@@ -5,11 +5,21 @@
 </head>
 <body>
   <script type="text/javascript" src="number_guesser.js"></script>
-  <input id="guess" placeholder="Enter your guess">
-  <button class="button button1" onclick="guessNumber()">Guess</button>
-  <button class="button button1" onclick="clearGuess()">Clear</button><br>
-  <p id="response"></p>
-  <button class="button button2" onclick="resetGame()">Reset</button>
+  <nav>
+    <h1>
+      <span class="pink">Number</span><span class="gray"> Guesser</span>
+    </h1>
+  </nav>
+  <div class="game">
+    <input id="guess" placeholder="Enter your guess"><br>
 
+    <button class="button" onclick="guessNumber()">Guess</button>
+
+    <button class="button" onclick="clearGuess()">Clear</button><br>
+
+    <p id="response"></p>
+
+    <button class="button" onclick="resetGame()">Reset</button>
+  </div>
 </body>
 </html>

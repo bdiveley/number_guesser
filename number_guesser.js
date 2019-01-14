@@ -17,7 +17,7 @@ function guessNumber() {
 }
 
 function clearGuess() {
-  document.getElementById("guess").value = " ";
+  document.getElementById("guess").value = "";
 }
 
 function clearResponse() {
