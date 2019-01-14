@@ -10,7 +10,10 @@
   border-radius: 40px;
 }
 
-
 .button:hover {
   background-color: #EB008B;
+}
+
+.one {
+  color: #EB008B;
 }
