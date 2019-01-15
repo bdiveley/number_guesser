@@ -36,6 +36,7 @@ function compareNumbers(guess) {
 }
 
 function clearGuess() {
+  disableBtn("clearbtn")
   document.getElementById("guess").value = "";
 }
 
