@@ -37,7 +37,7 @@ function compareNumbers(guess) {
     return `${text} That is too high`;
   } else {
     levelUp();
-    return `BOOM!  Your just leveled up!  Your new guess range is ${minimum} to ${maximum}`;
+    return `BOOM!  You just leveled up!  Your new guess range is ${minimum} to ${maximum}`;
   };
 }
 
