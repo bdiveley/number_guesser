@@ -1,9 +1,10 @@
 function randomizeNumber() {
-  return Math.floor((Math.random() * 10) + 1);
+  return Math.floor((Math.random() * maximum) + minimum);
 }
 
 function guessNumber() {
   var guessed = document.getElementById("guess").value;
+  setMinMax();
   if (validGuess(guessed)) {
     enableBtn("resetbtn");
     enableBtn("clearbtn");
@@ -12,11 +13,16 @@ function guessNumber() {
   };
 }
 
+function setMinMax() {
+  minimum = document.getElementById("minimum").value;
+  maximum = document.getElementById("maximum").value;
+}
+
 function validGuess(guess) {
   if (isNaN(guess)) {
     alert("You must enter a number");
     return false;
-  } else if (parseInt(guess) < 1 || parseInt(guess) > 10) {
+  } else if (parseInt(guess) < minimum || parseInt(guess) > maximum) {
     alert("Number must be within range");
     return false;
   } else {
@@ -44,9 +50,15 @@ function clearResponse() {
   document.getElementById("response").innerHTML = " ";
 }
 
+function clearRange() {
+  document.getElementById("minimum").value = "";
+  document.getElementById("maximum").value = "";
+}
+
 function resetGame() {
   clearGuess();
   clearResponse();
+  clearRange();
   disableBtn("resetbtn");
   disableBtn("clearbtn");
   answer = randomizeNumber();
@@ -61,3 +73,5 @@ function enableBtn(button) {
 }
 
 var answer = randomizeNumber();
+var minimum = 0;
+var maximum = 0;
