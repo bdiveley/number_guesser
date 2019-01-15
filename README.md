@@ -1,6 +1,6 @@
 Number Guesser is a Javascript application that allows players to guess a randomized number within a selected range.
 
-![alt text](/images/number_guess.png)
+![alt text](/images/number_guesser.png)
 
 Upon game start, the player can select a minimum and maximum number range to begin.  The minimum and maximum numbers are inclusive so the randomized number generator may choose those as the correct answer.
 
