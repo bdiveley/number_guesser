@@ -1,7 +1,10 @@
-function randomizeNumber() {
-  min = Math.ceil(minimum);
-  max = Math.floor(maximum);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+function setGameVariables() {
+  minimum = parseInt(document.getElementById("minimum").value);
+  maximum = parseInt(document.getElementById("maximum").value);
+  answer = randomizeNumber();
+  disableBtn("rangebtn");
+  disableBtn("minimum");
+  disableBtn("maximum");
 }
 
 function guessNumber() {
@@ -12,13 +15,6 @@ function guessNumber() {
     var feedback = compareNumbers(guessed);
     document.getElementById("response").innerHTML = feedback;
   };
-}
-
-function setGameVariables() {
-  minimum = parseInt(document.getElementById("minimum").value);
-  maximum = parseInt(document.getElementById("maximum").value);
-  answer = randomizeNumber();
-  disableBtn("rangebtn");
 }
 
 function validGuess(guess) {
@@ -45,26 +41,31 @@ function compareNumbers(guess) {
   };
 }
 
-function clearGuess() {
-  disableBtn("clearbtn")
-  document.getElementById("guess").value = "";
-}
-
-function clearResponse() {
-  document.getElementById("response").innerHTML = " ";
-}
-
-function clearRange() {
-  document.getElementById("minimum").value = "";
-  document.getElementById("maximum").value = "";
+function randomizeNumber() {
+  min = Math.ceil(minimum);
+  max = Math.floor(maximum);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function levelUp() {
   minimum -= 10;
   maximum += 10;
-  document.getElementById("minimum").value = minimum;
-  document.getElementById("maximum").value = maximum;
+  setMinDisplay(minimum);
+  setMaxDisplay(maximum);
   answer = randomizeNumber();
+}
+
+function clearRange() {
+  setMinDisplay("");
+  setMaxDisplay("");
+}
+
+function setMinDisplay(input) {
+  document.getElementById("minimum").value = input;
+}
+
+function setMaxDisplay(input) {
+  document.getElementById("maximum").value = input;
 }
 
 function resetGame() {
@@ -73,7 +74,18 @@ function resetGame() {
   clearRange();
   disableBtn("resetbtn");
   disableBtn("clearbtn");
-  enableBtn("rangebtn")
+  enableBtn("rangebtn");
+  enableBtn("minimum");
+  enableBtn("maximum");
+}
+
+function clearGuess() {
+  disableBtn("clearbtn")
+  document.getElementById("guess").value = "";
+}
+
+function clearResponse() {
+  document.getElementById("response").innerHTML = " ";
 }
 
 function disableBtn(button) {
