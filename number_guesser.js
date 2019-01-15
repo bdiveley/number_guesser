@@ -1,9 +1,14 @@
-function randomizeNumber() {
-  return Math.floor((Math.random() * 10) + 1);
+function setGameVariables() {
+  minimum = parseInt(document.getElementById("minimum").value);
+  maximum = parseInt(document.getElementById("maximum").value);
+  answer = randomizeNumber();
+  disableBtn("rangebtn");
+  disableBtn("minimum");
+  disableBtn("maximum");
 }
 
 function guessNumber() {
-  var guessed = document.getElementById("guess").value;
+  var guessed = parseInt(document.getElementById("guess").value);
   if (validGuess(guessed)) {
     enableBtn("resetbtn");
     enableBtn("clearbtn");
@@ -16,7 +21,7 @@ function validGuess(guess) {
   if (isNaN(guess)) {
     alert("You must enter a number");
     return false;
-  } else if (parseInt(guess) < 1 || parseInt(guess) > 10) {
+  } else if (guess < minimum || guess > maximum) {
     alert("Number must be within range");
     return false;
   } else {
@@ -31,8 +36,47 @@ function compareNumbers(guess) {
   } else if (guess > answer) {
     return `${text} That is too high`;
   } else {
-    return "BOOM!";
+    levelUp();
+    return `BOOM!  Your just leveled up!  Your new guess range is ${minimum} to ${maximum}`;
   };
+}
+
+function randomizeNumber() {
+  min = Math.ceil(minimum);
+  max = Math.floor(maximum);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function levelUp() {
+  minimum -= 10;
+  maximum += 10;
+  setMinDisplay(minimum);
+  setMaxDisplay(maximum);
+  answer = randomizeNumber();
+}
+
+function clearRange() {
+  setMinDisplay("");
+  setMaxDisplay("");
+}
+
+function setMinDisplay(input) {
+  document.getElementById("minimum").value = input;
+}
+
+function setMaxDisplay(input) {
+  document.getElementById("maximum").value = input;
+}
+
+function resetGame() {
+  clearGuess();
+  clearResponse();
+  clearRange();
+  disableBtn("resetbtn");
+  disableBtn("clearbtn");
+  enableBtn("rangebtn");
+  enableBtn("minimum");
+  enableBtn("maximum");
 }
 
 function clearGuess() {
@@ -44,14 +88,6 @@ function clearResponse() {
   document.getElementById("response").innerHTML = " ";
 }
 
-function resetGame() {
-  clearGuess();
-  clearResponse();
-  disableBtn("resetbtn");
-  disableBtn("clearbtn");
-  answer = randomizeNumber();
-}
-
 function disableBtn(button) {
   document.getElementById(button).disabled = true;
 }
@@ -60,4 +96,6 @@ function enableBtn(button) {
   document.getElementById(button).disabled = false;
 }
 
-var answer = randomizeNumber();
+var answer = 0;
+var minimum = 0;
+var maximum = 0;
