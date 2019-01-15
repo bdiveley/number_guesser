@@ -11,15 +11,15 @@
     </h1>
   </nav>
   <div class="game">
-    <input id="guess" placeholder="Enter your guess"><br>
+    <input id="guess" type="text"  placeholder="Enter your guess"><br>
 
     <button class="button" onclick="guessNumber()">Guess</button>
 
-    <button class="button" onclick="clearGuess()">Clear</button><br>
+    <button id="clearbtn" class="button" disabled="disabled" onclick="clearGuess()">Clear</button><br>
 
     <p id="response"></p>
 
-    <button class="button" onclick="resetGame()">Reset</button>
+    <button id="resetbtn" class="button" disabled="disabled" onclick="resetGame()">Reset</button>
   </div>
 </body>
 </html>

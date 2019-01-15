@@ -54,3 +54,7 @@ h1 {
 #response {
   font-family: 'Open Sans', sans-serif;
 }
+
+.button:disabled{
+  background: #D0D2D3;
+}

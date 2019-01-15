@@ -5,6 +5,8 @@ function randomizeNumber() {
 function guessNumber() {
   var guessed = document.getElementById("guess").value;
   if (validGuess(guessed)) {
+    enableBtn("resetbtn");
+    enableBtn("clearbtn");
     var feedback = compareNumbers(guessed);
     document.getElementById("response").innerHTML = feedback;
   };
@@ -19,8 +21,7 @@ function validGuess(guess) {
     return false;
   } else {
     return true;
-};
-
+  };
 }
 
 function compareNumbers(guess) {
@@ -45,7 +46,17 @@ function clearResponse() {
 function resetGame() {
   clearGuess();
   clearResponse();
+  disableBtn("resetbtn");
+  disableBtn("clearbtn");
   answer = randomizeNumber();
+}
+
+function disableBtn(button) {
+  document.getElementById(button).disabled = true;
+}
+
+function enableBtn(button) {
+  document.getElementById(button).disabled = false;
 }
 
 var answer = randomizeNumber();
