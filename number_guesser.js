@@ -8,7 +8,7 @@ function setGameVariables() {
 }
 
 function guessNumber() {
-  var guessed = parseInt(document.getElementById("guess").value);
+  const guessed = parseInt(document.getElementById("guess").value);
   if (validGuess(guessed)) {
     enableBtn("resetbtn");
     enableBtn("clearbtn");
@@ -30,7 +30,7 @@ function validGuess(guess) {
 }
 
 function compareNumbers(guess) {
-  text = `Your last guess was ${guess}.`
+  const text = `Your last guess was ${guess}.`
   if (guess < answer) {
     return `${text} That is too low`;
   } else if (guess > answer) {
@@ -42,9 +42,7 @@ function compareNumbers(guess) {
 }
 
 function randomizeNumber() {
-  min = Math.ceil(minimum);
-  max = Math.floor(maximum);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
 }
 
 function levelUp() {
