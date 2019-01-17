@@ -1,7 +1,13 @@
+var gameVars = {
+  answer: 0,
+  minimum: 0,
+  maximum: 0,
+}
+
 function setGameVariables() {
-  minimum = parseInt(document.getElementById("minimum").value);
-  maximum = parseInt(document.getElementById("maximum").value);
-  answer = randomizeNumber();
+  gameVars.minimum = parseInt(document.getElementById("minimum").value);
+  gameVars.maximum = parseInt(document.getElementById("maximum").value);
+  gameVars.answer = randomizeNumber();
   disableBtn("rangebtn");
   disableBtn("minimum");
   disableBtn("maximum");
@@ -21,7 +27,7 @@ function validGuess(guess) {
   if (isNaN(guess)) {
     alert("You must enter a number");
     return false;
-  } else if (guess < minimum || guess > maximum) {
+  } else if (guess < gameVars.minimum || guess > gameVars.maximum) {
     alert("Number must be within range");
     return false;
   } else {
@@ -31,26 +37,26 @@ function validGuess(guess) {
 
 function compareNumbers(guess) {
   const text = `Your last guess was ${guess}.`
-  if (guess < answer) {
+  if (guess < gameVars.answer) {
     return `${text} That is too low`;
-  } else if (guess > answer) {
+  } else if (guess > gameVars.answer) {
     return `${text} That is too high`;
   } else {
     levelUp();
-    return `BOOM!  You just leveled up!  Your new guess range is ${minimum} to ${maximum}`;
+    return `BOOM!  You just leveled up!  Your new guess range is ${gameVars.minimum} to ${gameVars.maximum}`;
   };
 }
 
 function randomizeNumber() {
-  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+  return Math.floor(Math.random() * (gameVars.maximum - gameVars.minimum + 1)) + gameVars.minimum;
 }
 
 function levelUp() {
-  minimum -= 10;
-  maximum += 10;
-  setMinDisplay(minimum);
-  setMaxDisplay(maximum);
-  answer = randomizeNumber();
+  gameVars.minimum -= 10;
+  gameVars.maximum += 10;
+  setMinDisplay(gameVars.minimum);
+  setMaxDisplay(gameVars.maximum);
+  gameVars.answer = randomizeNumber();
 }
 
 function clearRange() {
@@ -93,7 +99,3 @@ function disableBtn(button) {
 function enableBtn(button) {
   document.getElementById(button).disabled = false;
 }
-
-var answer = 0;
-var minimum = 0;
-var maximum = 0;
