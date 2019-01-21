@@ -1,11 +1,22 @@
+/* set initial variables in gameVars object upon first gameplay.
+used var because it's not within a block scope
+and these variables will be changed a lot
+throughout gameplace
+*/
+var gameVars = {
+  answer: 0,
+  minimum: 0,
+  maximum: 0,
+}
+
 //function get called when the Set Range button is clicked
 function setGameVariables() {
-//assigns the value of the minimum element to minimim var
-  minimum = parseInt(document.getElementById("minimum").value);
-////assigns the value of the minimum element to minimim var
-  maximum = parseInt(document.getElementById("maximum").value);
-// sets a new randomized answer that falls within new min/max
-  answer = randomizeNumber();
+//assigns the value of the minimum element to minimim var; utilizing dot notation
+  gameVars.minimum = parseInt(document.getElementById("minimum").value);
+////assigns the value of the minimum element to minimim var; utilizing dot notation
+  gameVars.maximum = parseInt(document.getElementById("maximum").value);
+// sets a new randomized answer that falls within new min/max; utilizing dot notation
+  gameVars.answer = randomizeNumber();
 //disables all three range elements until game is reset
   disableBtn("rangebtn");
   disableBtn("minimum");
@@ -26,7 +37,7 @@ the code
     enableBtn("resetbtn");
     enableBtn("clearbtn");
 /*set feedback variable equal to the return value of
-the compareNumber function which will return a string
+the compareNumber function which will return a string; setting it equal to a const variable because the feedback variable shouldnt change after its set within the function
 */
     const feedback = compareNumbers(guessed);
 // set response value to the new feedback variable
@@ -42,8 +53,8 @@ function validGuess(guess) {
     alert("You must enter a number");
 //and returns false
     return false;
-// if the guess does not fall within the min/max range
-  } else if (guess < minimum || guess > maximum) {
+// if the guess does not fall within the min/max range based on gameVars object attributes
+  } else if (guess < gameVars.minimum || guess > gameVars.maximum) {
 //an alert is sent that tells the user to stay within range
     alert("Number must be within range");
 //and returns false
@@ -58,42 +69,42 @@ function validGuess(guess) {
 function compareNumbers(guess) {
 // use const because text won't change again in this block.  Interpolating guess variable into string
   const text = `Your last guess was ${guess}.`
-// if block determines what response should be given to user
-  if (guess < answer) {
-// if guess is less than the answer, then this string should be displayed
+// the if block determines what response should be given to user
+  if (guess < gameVars.answer) {
+// if guess is less than the answer attribute in the gameVars object, then this string should be displayed
     return `${text} That is too low`;
-  } else if (guess > answer) {
-// if guess is more than the answer, then this string should be displayed
+  } else if (guess > gameVars.answer) {
+// if guess is more than the answer attribute in the gameVars object, then this string should be displayed
     return `${text} That is too high`;
   } else {
 /* the only other option is that the guess = answer.
 in that case, call the levelUp helper function to expand the min/max range
 */
     levelUp();
-// displays the new min/max range interpolated in this return string
-    return `BOOM!  Your just leveled up!  Your new guess range is ${minimum} to ${maximum}`;
+// displays the new min/max attributes in the gameVars object interpolated in this return string
+    return `BOOM!  You just leveled up!  Your new guess range is ${gameVars.minimum} to ${gameVars.maximum}`;
   };
 }
 
 // function randomizes a number within a min/max range
 function randomizeNumber() {
-/* returns a randomized number between min/max (inclusive) must include the word return because
+/* returns a randomized number between min/max attributes of gameVars object (inclusive) must include the word return because
 this function is meant to return a value
 */
-  return Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+  return Math.floor(Math.random() * (gameVars.maximum - gameVars.minimum + 1)) + gameVars.minimum;
 }
 
 // function levels up gameplay for the next round
 function levelUp() {
-// subtracts 10 from minimum stored in variable
-  minimum -= 10;
-// adds 10 to maximum variable
-  maximum += 10;
-//calls helper functions to display new min/max
-  setMinDisplay(minimum);
-  setMaxDisplay(maximum);
-// sets new randomized number to answer variable
-  answer = randomizeNumber();
+// subtracts 10 from minimum stored in gameVars object
+  gameVars.minimum -= 10;
+// adds 10 to maximum attribute stored in gameVars object
+  gameVars.maximum += 10;
+//calls helper functions to display new min/max attributes in gameVars object
+  setMinDisplay(gameVars.minimum);
+  setMaxDisplay(gameVars.maximum);
+// sets new randomized number to answer attribute in gameVars object
+  gameVars.answer = randomizeNumber();
 }
 
 // function clears input ranges for max/min
@@ -164,12 +175,3 @@ and sets disabled attribute to false
 */
   document.getElementById(button).disabled = false;
 }
-
-/* set initial variables upon first gameplay.
-used var because it's not within a block scope
-and these variables will be changed a lot
-throughout gameplace
-*/
-var answer = 0;
-var minimum = 0;
-var maximum = 0;
